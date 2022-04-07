@@ -17,7 +17,6 @@ Markdown==3.3.6
 MarkupSafe==2.1.1
 peewee==3.14.10
 psycopg2==2.9.3
-pwquality==1.4.4
 pycairo==1.21.0
 PyGObject==3.42.0
 python-dotenv==0.20.0
