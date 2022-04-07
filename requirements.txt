@@ -1,5 +1,4 @@
 aniso8601==9.0.1
-Brlapi==0.8.3
 btrfsutil==5.16.2
 chardet==4.0.0
 click==8.0.4
