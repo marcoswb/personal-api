@@ -1,5 +1,6 @@
 from flask import jsonify
 from flask_restful import Resource
+
 from models.General import General
 
 class Contacts(Resource):
