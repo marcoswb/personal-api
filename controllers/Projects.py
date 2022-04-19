@@ -10,7 +10,8 @@ class Projects(Resource):
         result = database.select(
             ModelProjects.name,
             ModelProjects.description,
-            ModelProjects.techs
+            ModelProjects.techs,
+            ModelProjects.link
         ).dicts()
 
         if result:

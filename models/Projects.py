@@ -14,6 +14,7 @@ class Projects(peewee.Model):
     name = peewee.CharField()
     description = peewee.CharField()
     techs = peewee.CharField()
+    link = peewee.CharField()
 
     class Meta:
         database = db 
