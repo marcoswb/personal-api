@@ -22,7 +22,7 @@ class Projects(Resource):
             projects.append({
                 'name': project['name'],
                 'description': project['description'],
-                'html_url': project['html_url'],
+                'link': project['html_url'],
                 'languages': languages
             })
             
