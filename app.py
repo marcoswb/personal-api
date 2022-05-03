@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
 
 from controllers.Root import Root
 from controllers.Experience import Experience
@@ -9,6 +10,8 @@ from controllers.Blog import Blog
 from controllers.Contacts import Contacts
 
 app = Flask(__name__)
+CORS(app)
+
 api = Api(app)
 
 api.add_resource(Root, '/')
