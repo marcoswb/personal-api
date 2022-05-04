@@ -9,21 +9,27 @@ class Projects(Resource):
     github_user = getenv('GITHUB_USER')
 
     def get(self):
-        response = requests.get(f'https://api.github.com/users/{self.github_user}/repos')
+        try:
+            response = requests.get(f'https://api.github.com/users/{self.github_user}/repos')
 
-        projects = []
-        for project in response.json():
-            languages_response = requests.get(f"https://api.github.com/repos/{self.github_user}/{project['name']}/languages")
+            projects = []
+            for project in response.json():
+                try:
+                    languages_response = requests.get(f"https://api.github.com/repos/{self.github_user}/{project['name']}/languages")
 
-            languages = []
-            for language in languages_response.json():
-                languages.append(language)
+                    languages = []
+                    for language in languages_response.json():
+                        languages.append(language)
 
-            projects.append({
-                'name': project['name'],
-                'description': project['description'],
-                'link': project['html_url'],
-                'languages': languages
-            })
-            
-        return jsonify(projects)
+                    projects.append({
+                        'name': project['name'],
+                        'description': project['description'],
+                        'link': project['html_url'],
+                        'languages': languages
+                    })
+                except:
+                    pass
+                
+            return jsonify(projects)
+        except:
+            return jsonify('Error in handle request.')
