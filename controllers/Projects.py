@@ -27,8 +27,8 @@ class Projects(Resource):
                         'link': project['html_url'],
                         'languages': languages
                     })
-                except:
-                    pass
+                except Exception as e:
+                    projects.append(e)
                 
             return jsonify(projects)
         except:
