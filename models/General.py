@@ -13,7 +13,7 @@ db = peewee.PostgresqlDatabase(
 class General(peewee.Model):
     name = peewee.CharField()
     full_name = peewee.CharField()
-    occupation = peewee.CharField()
+    short_description = peewee.CharField()
     about = peewee.TextField()
     email = peewee.CharField()
     number_phone = peewee.CharField()

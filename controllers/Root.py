@@ -10,7 +10,7 @@ class Root(Resource):
         database.connect()
         result = database.select(
             General.name,
-            General.occupation,
+            General.short_description,
             General.number_phone,
             General.about,
             General.linkedin_link,
