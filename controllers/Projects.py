@@ -1,8 +1,9 @@
 from flask import jsonify
 from flask_restful import Resource
-import requests
 from dotenv import load_dotenv
 from os import getenv
+
+from models.Projects import Project
 
 class Projects(Resource):
     load_dotenv()
@@ -10,25 +11,19 @@ class Projects(Resource):
 
     def get(self):
         try:
-            response = requests.get(f'https://api.github.com/users/{self.github_user}/repos')
+            sqlite = Project()
+            sqlite.connect()
 
             projects = []
-            for project in response.json():
-                try:
-                    languages_response = requests.get(f"https://api.github.com/repos/{self.github_user}/{project['name']}/languages")
-
-                    languages = []
-                    for language in languages_response.json():
-                        languages.append(language)
-
+            data = sqlite.select().dicts()
+            for project in data:
+                    languages = project['languages'].split(',')
                     projects.append({
                         'name': project['name'],
                         'description': project['description'],
-                        'link': project['html_url'],
+                        'link': project['link'],
                         'languages': languages
                     })
-                except Exception as e:
-                    projects.append(e)
                 
             return jsonify(projects)
         except:
