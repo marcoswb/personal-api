@@ -23,4 +23,4 @@ class Project(peewee.Model):
         try:
             Project.create_table()
         except peewee.OperationalError:
-            print('erro ao criar tabela')
+            pass
