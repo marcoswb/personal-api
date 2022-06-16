@@ -27,7 +27,7 @@ class UpdateBlog(Resource):
             for elem in post.iter():
                 if 'encoded' in elem.tag:
                     position_first_paragraph = (elem.text.find('<p>')+25)
-                    description = elem.text[position_first_paragraph:position_first_paragraph+50]
+                    description = elem.text[position_first_paragraph:position_first_paragraph+80]
             
             sqlite_blog = Blog()
             sqlite_blog.connect()
