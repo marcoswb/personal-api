@@ -32,7 +32,7 @@ class UpdateBlog(Resource):
             sqlite_blog = Blog()
             sqlite_blog.connect()
             sqlite_blog.name = post.find('title').text
-            sqlite_blog.description = f'{description.capitalize()}...',
+            sqlite_blog.description = f'{description.capitalize()}...'
             sqlite_blog.link = post.find('link').text
             sqlite_blog.categories = categories_string[:-1]
             sqlite_blog.save()
