@@ -1,16 +1,13 @@
-from flask_restful import Resource
 import requests
-from dotenv import load_dotenv
-from os import getenv
+import os
 
 from models.Blog import Blog
 
-class UpdateBlog(Resource):
-    load_dotenv()
-    medium_user = getenv('MEDIUM_USER')
-    api_key = getenv('API_KEY')
-    api_host = getenv('API_HOST')
-    base_url = getenv('BASE_URL')
+class UpdateBlog():
+    medium_user = os.environ['MEDIUM_USER']
+    api_key = os.environ['API_KEY']
+    api_host = os.environ['API_HOST']
+    base_url = os.environ['BASE_URL']
 
     headers = {
         "X-RapidAPI-Key": api_key,
