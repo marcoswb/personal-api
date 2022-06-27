@@ -120,7 +120,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>528</number>
+            <number>526</number>
            </attribute>
            <column>
             <property name="text">
@@ -316,7 +316,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>263</number>
+            <number>261</number>
            </attribute>
            <column>
             <property name="text">
