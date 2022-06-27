@@ -3,18 +3,18 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PySide6.QtCore import QFile
 
-from controllers.General import Controller as GeneralController
-from controllers.Skills import Controller as SkillsController
-from controllers.Experience import Controller as ExperienceController
-from controllers.Formation import Controller as FormationController
-from controllers.Projects import Controller as ProjectsController
-from controllers.Blog import Controller as BlogController
+from database_handler.controllers.General import Controller as GeneralController
+from database_handler.controllers.Skills import Controller as SkillsController
+from database_handler.controllers.Experience import Controller as ExperienceController
+from database_handler.controllers.Formation import Controller as FormationController
+from database_handler.controllers.Projects import Controller as ProjectsController
+from database_handler.controllers.Blog import Controller as BlogController
 
 class Main(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.__window = self.setup_ui('main_screen.ui')
+        self.__window = self.setup_ui('./database_handler/screen.ui')
         self.link_components()
     
     def setup_ui(self, ui_file_name):
