@@ -36,6 +36,20 @@ class Main(QMainWindow):
         self.__table_widget_projects = self.__window.table_widget__projects
         self.__table_widget_blog = self.__window.table_widget__blog
 
+        self.__button_general = self.__window.button__general
+        self.__button_skills = self.__window.button__skills
+        self.__button_experience = self.__window.button__experience
+        self.__button_formation = self.__window.button__formation
+        self.__button_projects = self.__window.button__projects
+        self.__button_blog = self.__window.button__blog
+
+        self.__button_general.clicked.connect(self.save_general)
+        self.__button_skills.clicked.connect(self.save_skills)
+        self.__button_experience.clicked.connect(self.save_experience)
+        self.__button_formation.clicked.connect(self.save_formation)
+        self.__button_projects.clicked.connect(self.save_projects)
+        self.__button_blog.clicked.connect(self.save_blog)
+
     def init(self):
         """
         Renderizar janela
@@ -139,6 +153,96 @@ class Main(QMainWindow):
             for _ in range(len(line)):
                 self.__table_widget_blog.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
                 number_column += 1
+
+    def save_general(self):
+        """
+        Salvar dados tab Geral
+        """
+        controller = GeneralController()
+        data = []
+        for row_number in range(self.__table_widget_general.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget_general.columnCount()):
+                row.append(self.__table_widget_general.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
+
+    def save_skills(self):
+        """
+        Salvar dados tab Skills
+        """
+        controller = SkillsController()
+        data = []
+        for row_number in range(self.__table_widget_skills.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget_skills.columnCount()):
+                row.append(self.__table_widget_skills.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
+
+    def save_experience(self):
+        """
+        Salvar dados tab Experience
+        """
+        controller = ExperienceController()
+        data = []
+        for row_number in range(self.__table_widget_experience.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget_experience.columnCount()):
+                row.append(self.__table_widget_experience.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
+
+    def save_formation(self):
+        """
+        Salvar dados tab Formation
+        """
+        controller = FormationController()
+        data = []
+        for row_number in range(self.__table_widget__formation.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget__formation.columnCount()):
+                row.append(self.__table_widget__formation.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
+
+    def save_projects(self):
+        """
+        Salvar dados tab Projects
+        """
+        controller = ProjectsController()
+        data = []
+        for row_number in range(self.__table_widget_projects.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget_projects.columnCount()):
+                row.append(self.__table_widget_projects.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
+
+    def save_blog(self):
+        """
+        Salvar dados tab Blog
+        """
+        controller = BlogController()
+        data = []
+        for row_number in range(self.__table_widget_blog.rowCount()):
+            row = []
+            for column_number in range(self.__table_widget_blog.columnCount()):
+                row.append(self.__table_widget_blog.item(row_number, column_number).text())
+            
+            data.append(tuple(row))
+
+        controller.save_data(data)
 
 
 if __name__ == '__main__':

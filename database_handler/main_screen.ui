@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="tab__general">
        <property name="minimumSize">
@@ -90,6 +90,13 @@
            </column>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="button__general">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </widget>
@@ -113,7 +120,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>531</number>
+            <number>528</number>
            </attribute>
            <column>
             <property name="text">
@@ -125,6 +132,13 @@
              <string>link_icon</string>
             </property>
            </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button__skills">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -150,7 +164,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>353</number>
+            <number>351</number>
            </attribute>
            <column>
             <property name="text">
@@ -167,6 +181,13 @@
              <string>period</string>
             </property>
            </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button__experience">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -192,7 +213,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>354</number>
+            <number>352</number>
            </attribute>
            <column>
             <property name="text">
@@ -209,6 +230,13 @@
              <string>period</string>
             </property>
            </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button__formation">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -234,7 +262,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>265</number>
+            <number>263</number>
            </attribute>
            <column>
             <property name="text">
@@ -256,6 +284,13 @@
              <string>languages</string>
             </property>
            </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button__projects">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -281,7 +316,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>265</number>
+            <number>263</number>
            </attribute>
            <column>
             <property name="text">
@@ -303,6 +338,13 @@
              <string>categories</string>
             </property>
            </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button__blog">
+           <property name="text">
+            <string>SALVAR</string>
+           </property>
           </widget>
          </item>
         </layout>
