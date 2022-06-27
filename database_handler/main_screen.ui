@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1090</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab__home">
+       <property name="minimumSize">
+        <size>
+         <width>1070</width>
+         <height>0</height>
+        </size>
+       </property>
+       <attribute name="title">
+        <string>Home</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QTableWidget" name="tableWidget">
+           <row>
+            <property name="text">
+             <string>linha</string>
+            </property>
+           </row>
+           <column>
+            <property name="text">
+             <string>coluna</string>
+            </property>
+           </column>
+           <item row="0" column="0">
+            <property name="text">
+             <string>home</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab__experience">
+       <attribute name="title">
+        <string>Experiência</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QTableWidget" name="tableWidget_2">
+           <row>
+            <property name="text">
+             <string>linha</string>
+            </property>
+           </row>
+           <column>
+            <property name="text">
+             <string>coluna</string>
+            </property>
+           </column>
+           <item row="0" column="0">
+            <property name="text">
+             <string>experiência</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab__formation">
+       <attribute name="title">
+        <string>Formação</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QTableWidget" name="tableWidget_3">
+             <row>
+              <property name="text">
+               <string>linha</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>coluna</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>formação</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab__projects">
+       <attribute name="title">
+        <string>Projetos</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QTableWidget" name="tableWidget_4">
+             <row>
+              <property name="text">
+               <string>linha</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>coluna</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>projetos</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab__blog">
+       <attribute name="title">
+        <string>Blog</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QTableWidget" name="tableWidget_5">
+             <row>
+              <property name="text">
+               <string>linha</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>coluna</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>blog</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab__contacts">
+       <attribute name="title">
+        <string>Contatos</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_6">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1071</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <widget class="QTableWidget" name="tableWidget_6">
+             <row>
+              <property name="text">
+               <string>linha</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>coluna</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>contatos</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
