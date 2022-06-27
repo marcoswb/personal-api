@@ -1,21 +1,144 @@
 from sys import exit
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PySide6.QtCore import QFile
+
+from controllers.General import Controller as GeneralController
+from controllers.Skills import Controller as SkillsController
+from controllers.Experience import Controller as ExperienceController
+from controllers.Formation import Controller as FormationController
+from controllers.Projects import Controller as ProjectsController
+from controllers.Blog import Controller as BlogController
 
 class Main(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.__window = self.setup_ui('main_screen.ui')
+        self.link_components()
     
     def setup_ui(self, ui_file_name):
+        """
+        Inicializar interface
+        """
         ui_file = QFile(ui_file_name)
         loader = QUiLoader()
         return loader.load(ui_file)
 
+    def link_components(self):
+        """
+        Vincular componentes da interface
+        """
+        self.__table_widget_general = self.__window.table_widget__general
+        self.__table_widget_skills = self.__window.table_widget__skills
+        self.__table_widget_experience = self.__window.table_widget__experience
+        self.__table_widget__formation = self.__window.table_widget__formation
+        self.__table_widget_projects = self.__window.table_widget__projects
+        self.__table_widget_blog = self.__window.table_widget__blog
+
     def init(self):
+        """
+        Renderizar janela
+        """
         self.__window.show()
+        self.init_general()
+        self.init_skills()
+        self.init_experience()
+        self.init_formation()
+        self.init_projects()
+        self.init_blog()
+
+
+    def init_general(self):
+        """
+        Inicializar tab Geral
+        """
+        controller = GeneralController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget_general.rowCount()
+            self.__table_widget_general.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget_general.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
+
+
+    def init_skills(self):
+        """
+        Inicializar tab Skills
+        """
+        controller = SkillsController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget_skills.rowCount()
+            self.__table_widget_skills.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget_skills.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
+
+    def init_experience(self):
+        """
+        Inicializar tab Experience
+        """
+        controller = ExperienceController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget_experience.rowCount()
+            self.__table_widget_experience.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget_experience.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
+
+    def init_formation(self):
+        """
+        Inicializar tab Formation
+        """
+        controller = FormationController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget__formation.rowCount()
+            self.__table_widget__formation.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget__formation.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
+
+    def init_projects(self):
+        """
+        Inicializar tab Projects
+        """
+        controller = ProjectsController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget_projects.rowCount()
+            self.__table_widget_projects.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget_projects.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
+
+    def init_blog(self):
+        """
+        Inicializar tab Blog
+        """
+        controller = BlogController()
+        options = controller.get_data()
+        for line in options:
+            number_rows = self.__table_widget_blog.rowCount()
+            self.__table_widget_blog.insertRow(number_rows)
+
+            number_column = 0
+            for _ in range(len(line)):
+                self.__table_widget_blog.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                number_column += 1
 
 
 if __name__ == '__main__':
