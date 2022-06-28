@@ -259,10 +259,11 @@ class Main(QMainWindow):
             
             data.append(row)
 
-        if controller.save_data(data):
+        success, message = controller.save_data(data)
+        if success:
             print('dados salvos com sucesso')
         else:
-            print('erro ao salvar dados')
+            print(f'erro ao salvar dados: {message}')
 
     def save_blog(self):
         """
