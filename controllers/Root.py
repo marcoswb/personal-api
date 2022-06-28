@@ -1,5 +1,7 @@
-from flask import jsonify
 from flask_restful import Resource
+from flask import request, Response, jsonify
+from dotenv import load_dotenv
+from os import getenv
 
 from models.General import General
 from models.Skills import Skills
@@ -31,3 +33,14 @@ class Root(Resource):
             result[0]['skills'].append(skill)
 
         return jsonify(result[0])
+
+    def post(self):
+        load_dotenv()
+
+        token = request.headers['Authorization']
+        expected_token = getenv('TOKEN')
+        if token == expected_token:
+            args = request.json
+            print(args)
+        else:
+            return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')
