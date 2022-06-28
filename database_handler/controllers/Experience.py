@@ -29,7 +29,7 @@ class Controller:
             headers = {
                 'Authorization': getenv('TOKEN')
             }
-            response = requests.post(getenv('ENDPOINT_API'), json=data[0], headers=headers)
+            response = requests.post(f"{getenv('ENDPOINT_API')}/experience", json=data, headers=headers)
             if response.status_code == 200:
                 return True, ''
             elif response.status_code == 401:
