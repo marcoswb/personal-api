@@ -161,13 +161,20 @@ class Main(QMainWindow):
         controller = GeneralController()
         data = []
         for row_number in range(self.__table_widget_general.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget_general.columnCount()):
-                row.append(self.__table_widget_general.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget_general.item(row_number, column_number)
+                column = self.__table_widget_general.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
+
 
     def save_skills(self):
         """
@@ -176,13 +183,19 @@ class Main(QMainWindow):
         controller = SkillsController()
         data = []
         for row_number in range(self.__table_widget_skills.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget_skills.columnCount()):
-                row.append(self.__table_widget_skills.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget_skills.item(row_number, column_number)
+                column = self.__table_widget_skills.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
 
     def save_experience(self):
         """
@@ -191,13 +204,19 @@ class Main(QMainWindow):
         controller = ExperienceController()
         data = []
         for row_number in range(self.__table_widget_experience.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget_experience.columnCount()):
-                row.append(self.__table_widget_experience.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget_experience.item(row_number, column_number)
+                column = self.__table_widget_experience.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
 
     def save_formation(self):
         """
@@ -206,13 +225,19 @@ class Main(QMainWindow):
         controller = FormationController()
         data = []
         for row_number in range(self.__table_widget__formation.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget__formation.columnCount()):
-                row.append(self.__table_widget__formation.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget__formation.item(row_number, column_number)
+                column = self.__table_widget__formation.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
 
     def save_projects(self):
         """
@@ -221,13 +246,19 @@ class Main(QMainWindow):
         controller = ProjectsController()
         data = []
         for row_number in range(self.__table_widget_projects.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget_projects.columnCount()):
-                row.append(self.__table_widget_projects.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget_projects.item(row_number, column_number)
+                column = self.__table_widget_projects.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
 
     def save_blog(self):
         """
@@ -236,13 +267,19 @@ class Main(QMainWindow):
         controller = BlogController()
         data = []
         for row_number in range(self.__table_widget_blog.rowCount()):
-            row = []
+            row = {}
             for column_number in range(self.__table_widget_blog.columnCount()):
-                row.append(self.__table_widget_blog.item(row_number, column_number).text())
-            
-            data.append(tuple(row))
+                item = self.__table_widget_blog.item(row_number, column_number)
+                column = self.__table_widget_blog.horizontalHeaderItem(column_number).text()
 
-        controller.save_data(data)
+                row[column] = item.text()
+            
+            data.append(row)
+
+        if controller.save_data(data):
+            print('dados salvos com sucesso')
+        else:
+            print('erro ao salvar dados')
 
 
 if __name__ == '__main__':
