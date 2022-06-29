@@ -3,12 +3,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PySide6.QtCore import QFile
 
-from database_handler.controllers.General import Controller as GeneralController
-from database_handler.controllers.Skills import Controller as SkillsController
-from database_handler.controllers.Experience import Controller as ExperienceController
-from database_handler.controllers.Formation import Controller as FormationController
-from database_handler.controllers.Projects import Controller as ProjectsController
-from database_handler.controllers.Blog import Controller as BlogController
+from database_handler.database_handler_controller import Controller
 
 class Main(QMainWindow):
 
@@ -29,6 +24,8 @@ class Main(QMainWindow):
         """
         Vincular componentes da interface
         """
+        self.__main_tab = self.__window.main_tab
+
         self.__table_widget_general = self.__window.table_widget__general
         self.__table_widget_skills = self.__window.table_widget__skills
         self.__table_widget_experience = self.__window.table_widget__experience
@@ -36,256 +33,131 @@ class Main(QMainWindow):
         self.__table_widget_projects = self.__window.table_widget__projects
         self.__table_widget_blog = self.__window.table_widget__blog
 
-        self.__button_general = self.__window.button__general
-        self.__button_skills = self.__window.button__skills
-        self.__button_experience = self.__window.button__experience
-        self.__button_formation = self.__window.button__formation
-        self.__button_projects = self.__window.button__projects
-        self.__button_blog = self.__window.button__blog
+        self.__button_save = self.__window.button__save
+        self.__button_add = self.__window.button__add
+        self.__button_remove = self.__window.button__remove
 
-        self.__button_general.clicked.connect(self.save_general)
-        self.__button_skills.clicked.connect(self.save_skills)
-        self.__button_experience.clicked.connect(self.save_experience)
-        self.__button_formation.clicked.connect(self.save_formation)
-        self.__button_projects.clicked.connect(self.save_projects)
-        self.__button_blog.clicked.connect(self.save_blog)
+        self.__button_add.clicked.connect(self.add_line)
+        self.__button_remove.clicked.connect(self.remove_line)
+        self.__button_save.clicked.connect(self.save)
 
     def init(self):
         """
         Renderizar janela
         """
         self.__window.show()
-        self.init_general()
-        self.init_skills()
-        self.init_experience()
-        self.init_formation()
-        self.init_projects()
-        self.init_blog()
+        self.load_tabs()
 
-
-    def init_general(self):
+    def load_tabs(self):
         """
-        Inicializar tab Geral
+        Carregar dados das tabelas
         """
-        controller = GeneralController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget_general.rowCount()
-            self.__table_widget_general.insertRow(number_rows)
+        for tab in self.get_all_tabs():
+            controller = Controller()
+            options = controller.get_data(self.get_number_tab(tab))
 
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget_general.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
+            if not options: continue
+            for line in options:
+                number_rows = tab.rowCount()
+                tab.insertRow(number_rows)
 
+                number_column = 0
+                for _ in range(len(line)):
+                    tab.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                    number_column += 1
 
-    def init_skills(self):
+    def add_line(self):
         """
-        Inicializar tab Skills
+        Adicionar linha na lista atual
         """
-        controller = SkillsController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget_skills.rowCount()
-            self.__table_widget_skills.insertRow(number_rows)
+        tab = self.get_instance_tab(self.get_current_tab())
+        number_rows =  tab.rowCount()
+        tab.insertRow(number_rows)
 
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget_skills.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
+    def remove_line(self):
+        """
+        Remover linha na lista atual
+        """
+        tab = self.get_instance_tab(self.get_current_tab())
+        selected = tab.currentRow()
+        tab.removeRow(selected)
 
-    def init_experience(self):
+    def save(self):
         """
-        Inicializar tab Experience
+        Salvar dados
         """
-        controller = ExperienceController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget_experience.rowCount()
-            self.__table_widget_experience.insertRow(number_rows)
-
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget_experience.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
-
-    def init_formation(self):
-        """
-        Inicializar tab Formation
-        """
-        controller = FormationController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget__formation.rowCount()
-            self.__table_widget__formation.insertRow(number_rows)
-
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget__formation.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
-
-    def init_projects(self):
-        """
-        Inicializar tab Projects
-        """
-        controller = ProjectsController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget_projects.rowCount()
-            self.__table_widget_projects.insertRow(number_rows)
-
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget_projects.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
-
-    def init_blog(self):
-        """
-        Inicializar tab Blog
-        """
-        controller = BlogController()
-        options = controller.get_data()
-        for line in options:
-            number_rows = self.__table_widget_blog.rowCount()
-            self.__table_widget_blog.insertRow(number_rows)
-
-            number_column = 0
-            for _ in range(len(line)):
-                self.__table_widget_blog.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
-                number_column += 1
-
-    def save_general(self):
-        """
-        Salvar dados tab Geral
-        """
-        controller = GeneralController()
+        tab = self.get_instance_tab(self.get_current_tab())
+        controller = Controller()
         data = []
-        for row_number in range(self.__table_widget_general.rowCount()):
+        for row_number in range(tab.rowCount()):
             row = {}
-            for column_number in range(self.__table_widget_general.columnCount()):
-                item = self.__table_widget_general.item(row_number, column_number)
-                column = self.__table_widget_general.horizontalHeaderItem(column_number).text()
+            for column_number in range(tab.columnCount()):
+                item = tab.item(row_number, column_number)
+                column = tab.horizontalHeaderItem(column_number).text()
 
                 row[column] = item.text()
             
             data.append(row)
 
-        success, message = controller.save_data(data)
+        success, message = controller.save_data(data, self.get_current_tab())
         if success:
             print('dados salvos com sucesso')
         else:
             print(f'erro ao salvar dados: {message}')
 
 
-    def save_skills(self):
+    def get_current_tab(self):
         """
-        Salvar dados tab Skills
+        Retorna a Tab atual do usuário
         """
-        controller = SkillsController()
-        data = []
-        for row_number in range(self.__table_widget_skills.rowCount()):
-            row = {}
-            for column_number in range(self.__table_widget_skills.columnCount()):
-                item = self.__table_widget_skills.item(row_number, column_number)
-                column = self.__table_widget_skills.horizontalHeaderItem(column_number).text()
+        return self.__main_tab.currentIndex()
 
-                row[column] = item.text()
-            
-            data.append(row)
-
-        success, message = controller.save_data(data)
-        if success:
-            print('dados salvos com sucesso')
-        else:
-            print(f'erro ao salvar dados: {message}')
-
-    def save_experience(self):
+    def get_all_tabs(self):
         """
-        Salvar dados tab Experience
+        Retorna a Tab atual do usuário
         """
-        controller = ExperienceController()
-        data = []
-        for row_number in range(self.__table_widget_experience.rowCount()):
-            row = {}
-            for column_number in range(self.__table_widget_experience.columnCount()):
-                item = self.__table_widget_experience.item(row_number, column_number)
-                column = self.__table_widget_experience.horizontalHeaderItem(column_number).text()
+        return [
+            self.__table_widget_general,
+            self.__table_widget_skills,
+            self.__table_widget_experience,
+            self.__table_widget__formation,
+            self.__table_widget_projects,
+            self.__table_widget_blog
+        ]
 
-                row[column] = item.text()
-            
-            data.append(row)
-
-        success, message = controller.save_data(data)
-        if success:
-            print('dados salvos com sucesso')
-        else:
-            print(f'erro ao salvar dados: {message}')
-            
-    def save_formation(self):
+    def get_number_tab(self, tab):
         """
-        Salvar dados tab Formation
+        Retorna o numero da Tab com base no nome
         """
-        controller = FormationController()
-        data = []
-        for row_number in range(self.__table_widget__formation.rowCount()):
-            row = {}
-            for column_number in range(self.__table_widget__formation.columnCount()):
-                item = self.__table_widget__formation.item(row_number, column_number)
-                column = self.__table_widget__formation.horizontalHeaderItem(column_number).text()
+        if tab == self.__table_widget_general:
+            return 0
+        elif tab == self.__table_widget_skills:
+            return 1
+        elif tab == self.__table_widget_experience:
+            return 2
+        elif tab == self.__table_widget__formation:
+            return 3
+        elif tab == self.__table_widget_projects:
+            return 4
+        elif tab == self.__table_widget_blog:
+            return 5
 
-                row[column] = item.text()
-            
-            data.append(row)
-
-        success, message = controller.save_data(data)
-        if success:
-            print('dados salvos com sucesso')
-        else:
-            print(f'erro ao salvar dados: {message}')
-
-    def save_projects(self):
+    def get_instance_tab(self, number_tab):
         """
-        Salvar dados tab Projects
+        Retorna o numero da Tab com base no nome
         """
-        controller = ProjectsController()
-        data = []
-        for row_number in range(self.__table_widget_projects.rowCount()):
-            row = {}
-            for column_number in range(self.__table_widget_projects.columnCount()):
-                item = self.__table_widget_projects.item(row_number, column_number)
-                column = self.__table_widget_projects.horizontalHeaderItem(column_number).text()
-
-                row[column] = item.text()
-            
-            data.append(row)
-
-        success, message = controller.save_data(data)
-        if success:
-            print('dados salvos com sucesso')
-        else:
-            print(f'erro ao salvar dados: {message}')
-
-    def save_blog(self):
-        """
-        Salvar dados tab Blog
-        """
-        controller = BlogController()
-        data = []
-        for row_number in range(self.__table_widget_blog.rowCount()):
-            row = {}
-            for column_number in range(self.__table_widget_blog.columnCount()):
-                item = self.__table_widget_blog.item(row_number, column_number)
-                column = self.__table_widget_blog.horizontalHeaderItem(column_number).text()
-
-                row[column] = item.text()
-            
-            data.append(row)
-
-        success, message = controller.save_data(data)
-        if success:
-            print('dados salvos com sucesso')
-        else:
-            print(f'erro ao salvar dados: {message}')
+        if number_tab == 0:
+            return self.__table_widget_general
+        elif number_tab == 1:
+            return self.__table_widget_skills
+        elif number_tab == 2:
+            return self.__table_widget_experience
+        elif number_tab == 3:
+            return self.__table_widget__formation
+        elif number_tab == 4:
+            return self.__table_widget_projects
+        elif number_tab == 5:
+            return self.__table_widget_blog
 
 
 if __name__ == '__main__':

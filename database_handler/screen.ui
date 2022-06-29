@@ -16,341 +16,324 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab__general">
-       <property name="minimumSize">
-        <size>
-         <width>1070</width>
-         <height>0</height>
-        </size>
-       </property>
-       <attribute name="title">
-        <string>Geral</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QTabWidget" name="main_tab">
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QTableWidget" name="table_widget__general">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>131</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>full_name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>short_description</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>about</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>email</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>number_phone</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>github_link</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>linkedin_link</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__general">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QWidget" name="tab__general">
+         <property name="minimumSize">
+          <size>
+           <width>1070</width>
+           <height>0</height>
+          </size>
+         </property>
+         <attribute name="title">
+          <string>Geral</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTableWidget" name="table_widget__general">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>131</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>full_name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>short_description</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>about</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>email</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>number_phone</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>github_link</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>linkedin_link</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab__skills">
+         <attribute name="title">
+          <string>Skills</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_6">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QTableWidget" name="table_widget__skills">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>526</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>link_icon</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab__experience">
+         <attribute name="title">
+          <string>Experiência</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QTableWidget" name="table_widget__experience">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>351</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>company</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>ocuppation</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>period</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab__formation">
+         <attribute name="title">
+          <string>Formação</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTableWidget" name="table_widget__formation">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>352</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>institution</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>formation</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>period</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab__projects">
+         <attribute name="title">
+          <string>Projetos</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QTableWidget" name="table_widget__projects">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>263</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>description</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>link</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>languages</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab__blog">
+         <attribute name="title">
+          <string>Blog</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_5">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1071</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QTableWidget" name="table_widget__blog">
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>261</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>description</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>link</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>categories</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </widget>
-      </widget>
-      <widget class="QWidget" name="tab__skills">
-       <attribute name="title">
-        <string>Skills</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_6">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button__add">
+        <property name="text">
+         <string>ADICIONAR</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
-         <item>
-          <widget class="QTableWidget" name="table_widget__skills">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>526</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>link_icon</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__skills">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
-      </widget>
-      <widget class="QWidget" name="tab__experience">
-       <attribute name="title">
-        <string>Experiência</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_2">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button__remove">
+        <property name="text">
+         <string>REMOVER</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QTableWidget" name="table_widget__experience">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>351</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>company</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>ocuppation</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>period</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__experience">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
-      </widget>
-      <widget class="QWidget" name="tab__formation">
-       <attribute name="title">
-        <string>Formação</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button__save">
+        <property name="text">
+         <string>SALVAR</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QTableWidget" name="table_widget__formation">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>352</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>institution</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>formation</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>period</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__formation">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
-      </widget>
-      <widget class="QWidget" name="tab__projects">
-       <attribute name="title">
-        <string>Projetos</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_4">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QTableWidget" name="table_widget__projects">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>263</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>description</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>link</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>languages</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__projects">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab__blog">
-       <attribute name="title">
-        <string>Blog</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_5">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1071</width>
-          <height>541</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
-          <widget class="QTableWidget" name="table_widget__blog">
-           <property name="showGrid">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>261</number>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>name</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>description</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>link</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>categories</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button__blog">
-           <property name="text">
-            <string>SALVAR</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-     </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
