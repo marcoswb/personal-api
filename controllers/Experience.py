@@ -31,6 +31,19 @@ class Experience(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+            
+            database_drop = ModelExperience()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = ModelExperience()
+                database.connect()
+
+                database.company = item['company']
+                database.ocuppation = item['ocuppation']
+                database.period = item['period']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

@@ -34,6 +34,20 @@ class Projects(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+            
+            database_drop = Project()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = Project()
+                database.connect()
+
+                database.name = item['name']
+                database.description = item['description']
+                database.link = item['link']
+                database.languages = item['languages']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

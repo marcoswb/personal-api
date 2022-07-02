@@ -32,6 +32,20 @@ class Blog(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+            
+            database_drop = BlogSQLite()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = BlogSQLite()
+                database.connect()
+
+                database.name = item['name']
+                database.description = item['description']
+                database.link = item['link']
+                database.categories = item['categories']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

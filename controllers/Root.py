@@ -41,6 +41,24 @@ class Root(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+
+            database_drop = General()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = General()
+                database.connect()
+
+                database.name = item['name']
+                database.full_name = item['full_name']
+                database.short_description = item['short_description']
+                database.about = item['about']
+                database.email = item['email']
+                database.number_phone = item['number_phone']
+                database.github_link = item['github_link']
+                database.linkedin_link = item['linkedin_link']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

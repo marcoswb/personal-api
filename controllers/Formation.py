@@ -31,6 +31,19 @@ class Formation(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+            
+            database_drop = ModelFormation()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = ModelFormation()
+                database.connect()
+
+                database.institution = item['institution']
+                database.formation = item['formation']
+                database.period = item['period']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

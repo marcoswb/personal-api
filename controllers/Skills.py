@@ -3,7 +3,7 @@ from flask_restful import Resource
 from dotenv import load_dotenv
 from os import getenv
 
-from models.Skills import Skills
+from models.Skills import Skills as ModelSkills
 
 class Skills(Resource):
     def post(self):
@@ -13,6 +13,18 @@ class Skills(Resource):
         expected_token = getenv('TOKEN')
         if token == expected_token:
             args = request.json
-            print(args)
+            
+            database_drop = ModelSkills()
+            database_drop.drop_table()
+
+            for item in args:
+
+                database = ModelSkills()
+                database.connect()
+
+                database.name = item['name']
+                database.link_icon = item['link_icon']
+                
+                database.save()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')
