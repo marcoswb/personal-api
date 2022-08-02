@@ -147,6 +147,7 @@ class Controller:
             headers = {
                 'Authorization': getenv('TOKEN')
             }
+            
             response = requests.post(f"{getenv('ENDPOINT_API')}{endpoint}", json=data, headers=headers)
             if response.status_code == 200:
                 return True, ''
@@ -154,5 +155,5 @@ class Controller:
                 return False, 'Unauthorized'
             
             return False, ''
-        except:
-            return False, ''
+        except Exception as e:
+            return False, e

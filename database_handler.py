@@ -1,6 +1,6 @@
 from sys import exit
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from PySide6.QtCore import QFile
 
 from database_handler.database_handler_controller import Controller
@@ -101,9 +101,9 @@ class Main(QMainWindow):
 
         success, message = controller.save_data(data, self.get_current_tab())
         if success:
-            print('dados salvos com sucesso')
+            show_message(self, 'Processo finalizado', 'Dados salvos com sucesso!')
         else:
-            print(f'erro ao salvar dados: {message}')
+            show_message(self, 'Erro', f'Erro ao salvar dados: {message}!')
 
 
     def get_current_tab(self):
@@ -158,6 +158,10 @@ class Main(QMainWindow):
             return self.__table_widget_projects
         elif number_tab == 5:
             return self.__table_widget_blog
+        
+
+def show_message(container, title, message):
+    return QMessageBox.information(container, title, message)
 
 
 if __name__ == '__main__':
