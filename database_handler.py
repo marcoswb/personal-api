@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMess
 from PySide6.QtCore import QFile
 
 from database_handler.database_handler_controller import Controller
+from aws_lambda_update.controllers.update_projects import UpdateProjects
 
 class Main(QMainWindow):
 
@@ -37,9 +38,15 @@ class Main(QMainWindow):
         self.__button_add = self.__window.button__add
         self.__button_remove = self.__window.button__remove
 
+        self.__update_github = self.__window.button__update_github
+        self.__update_medium= self.__window.button__update_medium
+
         self.__button_add.clicked.connect(self.add_line)
         self.__button_remove.clicked.connect(self.remove_line)
         self.__button_save.clicked.connect(self.save)
+
+        self.__update_github.clicked.connect(self.update_github)
+        self.__update_medium.clicked.connect(self.update_medium)
 
     def init(self):
         """
@@ -105,6 +112,19 @@ class Main(QMainWindow):
         else:
             show_message(self, 'Erro', f'Erro ao salvar dados: {message}!')
 
+    def update_github(self):
+        """
+        Atualizar projetos com o Github
+        """
+        UpdateProjects().update()
+        self.load_tabs()
+        show_message(self, 'Processo finalizado', 'Dados atualizados com sucesso!')
+
+    def update_medium(self):
+        """
+        Atualizar posts com o Medium
+        """
+        show_message(self, 'Erro', 'Processo ainda não implementado.')
 
     def get_current_tab(self):
         """
@@ -158,7 +178,7 @@ class Main(QMainWindow):
             return self.__table_widget_projects
         elif number_tab == 5:
             return self.__table_widget_blog
-        
+
 
 def show_message(container, title, message):
     return QMessageBox.information(container, title, message)

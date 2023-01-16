@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1092</width>
+    <width>1094</width>
     <height>594</height>
    </rect>
   </property>
@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="main_tab">
         <property name="currentIndex">
-         <number>0</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="tab__general">
          <property name="minimumSize">
@@ -231,6 +231,13 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
+            <widget class="QPushButton" name="button__update_github">
+             <property name="text">
+              <string>Atualizar com Github</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QTableWidget" name="table_widget__projects">
              <property name="showGrid">
               <bool>true</bool>
@@ -277,6 +284,13 @@
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QPushButton" name="button__update_medium">
+             <property name="text">
+              <string>Atualizar com Medium</string>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QTableWidget" name="table_widget__blog">
              <property name="showGrid">
