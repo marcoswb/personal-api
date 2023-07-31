@@ -9,6 +9,7 @@ from models.Formation import Formation
 from models.Projects import Project
 from models.Blog import Blog
 
+
 class Controller:
 
     def __init__(self):
@@ -30,7 +31,8 @@ class Controller:
         else:
             return []
 
-    def get_data_general(self):
+    @staticmethod
+    def get_data_general():
         database = General()
         database.connect()
         result = database.select(
@@ -43,20 +45,25 @@ class Controller:
             General.email,
             General.full_name
         ).dicts()
-        
-        data = [(
-            result[0]['name'],
-            result[0]['full_name'],
-            result[0]['short_description'],
-            result[0]['about'],
-            result[0]['email'],
-            result[0]['number_phone'],
-            result[0]['github_link'],
-            result[0]['linkedin_link']
-        )]
+
+        data = []
+        if result:
+            data.append((
+                result[0]['name'],
+                result[0]['full_name'],
+                result[0]['short_description'],
+                result[0]['about'],
+                result[0]['email'],
+                result[0]['number_phone'],
+                result[0]['github_link'],
+                result[0]['linkedin_link']
+            ))
+
+        database.close_connection()
         return data
 
-    def get_data_skills(self):
+    @staticmethod
+    def get_data_skills():
         database = Skills()
         database.connect()
         result = database.select(
@@ -67,10 +74,12 @@ class Controller:
         data = []
         for line in result:
             data.append((line['name'], line['link_icon']))
-            
+
+        database.close_connection()
         return data
     
-    def get_data_experience(self):
+    @staticmethod
+    def get_data_experience():
         database = Experience()
         database.connect()
         result = database.select(
@@ -82,10 +91,12 @@ class Controller:
         data = []
         for line in result:
             data.append((line['company'], line['ocuppation'], line['period']))
-            
+
+        database.close_connection()
         return data
 
-    def get_data_formation(self):
+    @staticmethod
+    def get_data_formation():
         database = Formation()
         database.connect()
         result = database.select(
@@ -97,10 +108,12 @@ class Controller:
         data = []
         for line in result:
             data.append((line['institution'], line['formation'], line['period']))
-            
+
+        database.close_connection()
         return data
 
-    def get_data_projects(self):
+    @staticmethod
+    def get_data_projects():
         database = Project()
         database.connect()
         result = database.select(
@@ -113,10 +126,12 @@ class Controller:
         data = []
         for line in result:
             data.append((line['name'], line['description'], line['link'], line['languages']))
-            
+
+        database.close_connection()
         return data
 
-    def get_data_blog(self):
+    @staticmethod
+    def get_data_blog():
         database = Blog()
         database.connect()
         result = database.select(
@@ -129,10 +144,12 @@ class Controller:
         data = []
         for line in result:
             data.append((line['name'], line['description'], line['link'], line['categories']))
-            
+
+        database.close_connection()
         return data
 
-    def save_data(self, data, number_tab):
+    @staticmethod
+    def save_data(data, number_tab):
         try:
             endpoint_dict = {
                 0: '/',

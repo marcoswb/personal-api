@@ -10,6 +10,7 @@ db = peewee.PostgresqlDatabase(
     host=getenv('DB_HOST')
 )
 
+
 class Blog(peewee.Model):
     name = peewee.CharField()
     description = peewee.CharField()
@@ -19,8 +20,13 @@ class Blog(peewee.Model):
     class Meta:
         database = db 
 
-    def connect(self):
+    @staticmethod
+    def connect():
         try:
             Blog.create_table()
         except peewee.OperationalError:
             pass
+
+    @staticmethod
+    def close_connection():
+        db.close()
