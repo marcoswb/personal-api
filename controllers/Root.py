@@ -6,27 +6,19 @@ from os import getenv
 from models.General import General
 from models.Skills import Skills
 
+
 class Root(Resource):
-    def get(self):
-        database = General()
-        database.connect()
-        result = database.select(
-            General.name,
-            General.short_description,
-            General.number_phone,
-            General.about,
-            General.linkedin_link,
-            General.github_link,
-            General.email,
-            General.full_name
-        ).dicts()
+    @staticmethod
+    def get():
+        general_db = General()
+        general_db.connect()
+        result = general_db.select()
+        general_db.close_connection()
         
-        database = Skills()
-        database.connect()
-        result_skills = database.select(
-            Skills.name,
-            Skills.link_icon
-        ).dicts()
+        skills_db = Skills()
+        skills_db.connect()
+        result_skills = skills_db.select()
+        skills_db.close_connection()
         
         result[0]['skills'] = []
         for skill in result_skills:
@@ -34,7 +26,8 @@ class Root(Resource):
 
         return jsonify(result[0])
 
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -42,23 +35,21 @@ class Root(Resource):
         if token == expected_token:
             args = request.json
 
-            database_drop = General()
-            database_drop.drop_table()
+            general_db = General()
+            general_db.connect()
+            general_db.clear_table()
 
             for item in args:
-
-                database = General()
-                database.connect()
-
-                database.name = item['name']
-                database.full_name = item['full_name']
-                database.short_description = item['short_description']
-                database.about = item['about']
-                database.email = item['email']
-                database.number_phone = item['number_phone']
-                database.github_link = item['github_link']
-                database.linkedin_link = item['linkedin_link']
-                
-                database.save()
+                data = {
+                    'name': item.get('name'),
+                    'full_name': item.get('full_name'),
+                    'short_description': item.get('short_description'),
+                    'about': item.get('about'),
+                    'email': item.get('email'),
+                    'number_phone': item.get('number_phone'),
+                    'github_link': item.get('github_link'),
+                    'linkedin_link': item.get('linkedin_link'),
+                }
+                general_db.insert_line(data)
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

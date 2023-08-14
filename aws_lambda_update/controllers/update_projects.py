@@ -1,15 +1,15 @@
 import requests
 import os
 
-from models.Projects import Project
+from aws_lambda_update.classes.Posgres import Postgres
 
-class UpdateProjects():
+class UpdateProjects:
     github_user = os.environ['GITHUB_USER']
 
     def update(self):
         response = requests.get(f'https://api.github.com/users/{self.github_user}/repos')
-        sqlite = Project()
-        sqlite.drop_table()
+        sqlite = Postgres()
+        sqlite.clear
         sqlite.connect()
 
         for project in response.json():

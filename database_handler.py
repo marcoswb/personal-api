@@ -70,7 +70,7 @@ class Main(QMainWindow):
 
                 number_column = 0
                 for _ in range(len(line)):
-                    tab.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                    tab.setItem(number_rows, number_column, QTableWidgetItem(line[number_column]))
                     number_column += 1
 
     def add_line(self):

@@ -1,30 +1,15 @@
-import peewee
-from dotenv import load_dotenv
-from os import getenv
-
-load_dotenv()
-db = peewee.PostgresqlDatabase(
-    getenv('DB_DATABASE'),
-    user=getenv('DB_USER'),
-    password=getenv('DB_PASSWORD'),
-    host=getenv('DB_HOST')
-)
+from classes.Postgres import Postgres
 
 
-class Skills(peewee.Model):
-    name = peewee.CharField()
-    link_icon = peewee.CharField()
+class Skills(Postgres):
+    def __init__(self):
+        super().__init__('skills')
 
-    class Meta:
-        database = db 
+    def insert_line(self, data: dict):
+        cursor = self.__connection.cursor()
 
-    @staticmethod
-    def connect():
-        try:
-            Skills.create_table()
-        except peewee.OperationalError:
-            pass
+        base_sql = f'INSERT INTO {self.__table_name}(name, link_icon) VALUES (%s, %s)'
+        cursor.execute(base_sql, (data.get('name'), data.get('link_icon')))
 
-    @staticmethod
-    def close_connection():
-        db.close()
+        cursor.close()
+        self.__connection.commit()
