@@ -5,15 +5,14 @@ from os import getenv
 
 from models.Formation import Formation as ModelFormation
 
+
 class Formation(Resource):
-    def get(self):
-        database = ModelFormation()
-        database.connect()
-        result = database.select(
-            ModelFormation.institution,
-            ModelFormation.formation,
-            ModelFormation.period
-        ).dicts()
+    @staticmethod
+    def get():
+        formation_db = ModelFormation()
+        formation_db.connect()
+        result = formation_db.select()
+        formation_db.close_connection()
 
         if result:
             formations = []
@@ -24,7 +23,8 @@ class Formation(Resource):
         else:
             return jsonify([])
 
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -32,18 +32,16 @@ class Formation(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = ModelFormation()
-            database_drop.drop_table()
+            formation_db = ModelFormation()
+            formation_db.clear_table()
+            formation_db.connect()
 
             for item in args:
-
-                database = ModelFormation()
-                database.connect()
-
-                database.institution = item['institution']
-                database.formation = item['formation']
-                database.period = item['period']
-                
-                database.save()
+                data = {
+                    'institution': item['institution'],
+                    'formation': item['formation'],
+                    'period': item['period']
+                }
+                formation_db.insert_line(data)
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

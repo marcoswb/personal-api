@@ -1,31 +1,15 @@
-import peewee
-from dotenv import load_dotenv
-from os import getenv
-
-load_dotenv()
-db = peewee.PostgresqlDatabase(
-    getenv('DB_DATABASE'),
-    user=getenv('DB_USER'),
-    password=getenv('DB_PASSWORD'),
-    host=getenv('DB_HOST')
-)
+from classes.Postgres import Postgres
 
 
-class Formation(peewee.Model):
-    institution = peewee.CharField()
-    formation = peewee.CharField()
-    period = peewee.CharField()
+class Formation(Postgres):
+    def __init__(self):
+        super().__init__('formation')
 
-    class Meta:
-        database = db 
+    def insert_line(self, data: dict):
+        cursor = self.__connection.cursor()
 
-    @staticmethod
-    def connect():
-        try:
-            Formation.create_table()
-        except peewee.OperationalError:
-            pass
+        base_sql = f'INSERT INTO {self.__table_name}(institution, formation, period) VALUES (%s, %s, %s)'
+        cursor.execute(base_sql, (data.get('institution'), data.get('formation'), data.get('period')))
 
-    @staticmethod
-    def close_connection():
-        db.close()
+        cursor.close()
+        self.__connection.commit()
