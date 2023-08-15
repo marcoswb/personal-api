@@ -5,15 +5,14 @@ from os import getenv
 
 from models.Experience import Experience as ModelExperience
 
+
 class Experience(Resource):
-    def get(self):
-        database = ModelExperience()
-        database.connect()
-        result = database.select(
-            ModelExperience.company,
-            ModelExperience.ocuppation,
-            ModelExperience.period
-        ).dicts()
+    @staticmethod
+    def get():
+        experience_db = ModelExperience()
+        experience_db.connect()
+        result = experience_db.select()
+        experience_db.close_connection()
 
         if result:
             experiences = []
@@ -24,7 +23,8 @@ class Experience(Resource):
         else:
             return jsonify([])
 
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -32,18 +32,16 @@ class Experience(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = ModelExperience()
-            database_drop.drop_table()
+            experience_db = ModelExperience()
+            experience_db.connect()
+            experience_db.clear_table()
 
             for item in args:
-
-                database = ModelExperience()
-                database.connect()
-
-                database.company = item['company']
-                database.ocuppation = item['ocuppation']
-                database.period = item['period']
-                
-                database.save()
+                data = {
+                    'company': item['company'],
+                    'occupation': item['occupation'],
+                    'period': item['period']
+                }
+                experience_db.insert_line(data)
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')
