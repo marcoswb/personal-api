@@ -14,14 +14,12 @@ class Formation(Resource):
         result = formation_db.select()
         formation_db.close_connection()
 
+        formations = []
         if result:
-            formations = []
             for formation in result:
                 formations.append(formation)
-                
-            return jsonify(formations)
-        else:
-            return jsonify([])
+
+        return jsonify(formations)
 
     @staticmethod
     def post():

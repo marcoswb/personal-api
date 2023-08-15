@@ -14,14 +14,12 @@ class Experience(Resource):
         result = experience_db.select()
         experience_db.close_connection()
 
+        experiences = []
         if result:
-            experiences = []
             for experience in result:
                 experiences.append(experience)
                 
-            return jsonify(experiences)
-        else:
-            return jsonify([])
+        return jsonify(experiences)
 
     @staticmethod
     def post():
