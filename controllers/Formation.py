@@ -43,5 +43,6 @@ class Formation(Resource):
                     'period': item['period']
                 }
                 formation_db.insert_line(data)
+            formation_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

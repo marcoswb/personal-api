@@ -51,5 +51,6 @@ class Root(Resource):
                     'linkedin_link': item.get('linkedin_link'),
                 }
                 general_db.insert_line(data)
+            general_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

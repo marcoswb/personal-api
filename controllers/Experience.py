@@ -43,5 +43,6 @@ class Experience(Resource):
                     'period': item['period']
                 }
                 experience_db.insert_line(data)
+            experience_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')
