@@ -35,16 +35,7 @@ class Controller:
     def get_data_general():
         database = General()
         database.connect()
-        result = database.select(
-            General.name,
-            General.short_description,
-            General.number_phone,
-            General.about,
-            General.linkedin_link,
-            General.github_link,
-            General.email,
-            General.full_name
-        ).dicts()
+        result = database.select()
 
         data = []
         if result:
@@ -66,10 +57,7 @@ class Controller:
     def get_data_skills():
         database = Skills()
         database.connect()
-        result = database.select(
-            Skills.name,
-            Skills.link_icon
-        ).dicts()
+        result = database.select()
         
         data = []
         for line in result:
@@ -82,11 +70,7 @@ class Controller:
     def get_data_experience():
         database = Experience()
         database.connect()
-        result = database.select(
-            Experience.company,
-            Experience.ocuppation,
-            Experience.period
-        ).dicts()
+        result = database.select()
         
         data = []
         for line in result:
@@ -99,11 +83,7 @@ class Controller:
     def get_data_formation():
         database = Formation()
         database.connect()
-        result = database.select(
-            Formation.institution,
-            Formation.formation,
-            Formation.period
-        ).dicts()
+        result = database.select()
         
         data = []
         for line in result:
@@ -116,12 +96,7 @@ class Controller:
     def get_data_projects():
         database = Project()
         database.connect()
-        result = database.select(
-            Project.name,
-            Project.description,
-            Project.link,
-            Project.languages
-        ).dicts()
+        result = database.select()
         
         data = []
         for line in result:
@@ -134,12 +109,7 @@ class Controller:
     def get_data_blog():
         database = Blog()
         database.connect()
-        result = database.select(
-            Blog.name,
-            Blog.description,
-            Blog.link,
-            Blog.categories
-        ).dicts()
+        result = database.select()
         
         data = []
         for line in result:
