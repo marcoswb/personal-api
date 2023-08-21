@@ -3,18 +3,21 @@ from flask_restful import Resource
 from dotenv import load_dotenv
 from os import getenv
 
-from models.Projects import Project
+from models.Projects import Project as ModelProject
+
 
 class Projects(Resource):
 
-    def get(self):
-        try:
-            sqlite = Project()
-            sqlite.connect()
+    @staticmethod
+    def get():
+        project_db = ModelProject()
+        project_db.connect()
+        result = project_db.select()
+        project_db.close_connection()
 
-            projects = []
-            data = sqlite.select().dicts()
-            for project in data:
+        projects = []
+        if result:
+            for project in result:
                 languages = project['languages'].split(',')
                 projects.append({
                     'name': project['name'],
@@ -22,12 +25,11 @@ class Projects(Resource):
                     'link': project['link'],
                     'languages': languages
                 })
-                
-            return jsonify(projects)
-        except:
-            return jsonify('Error in handle request.')
 
-    def post(self):
+        return jsonify(projects)
+
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -35,19 +37,18 @@ class Projects(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = Project()
-            database_drop.drop_table()
+            project_db = ModelProject()
+            project_db.connect()
+            project_db.clear_table()
 
             for item in args:
-
-                database = Project()
-                database.connect()
-
-                database.name = item['name']
-                database.description = item['description']
-                database.link = item['link']
-                database.languages = item['languages']
-                
-                database.save()
+                data = {
+                    'name': item['name'],
+                    'description': item['description'],
+                    'link': item['link'],
+                    'languages': item['languages']
+                }
+                project_db.insert_line(data)
+            project_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

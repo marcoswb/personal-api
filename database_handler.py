@@ -6,6 +6,7 @@ from PySide6.QtCore import QFile
 from database_handler.database_handler_controller import Controller
 from aws_lambda_update.controllers.update_projects import UpdateProjects
 
+
 class Main(QMainWindow):
 
     def __init__(self):
@@ -13,7 +14,8 @@ class Main(QMainWindow):
         self.__window = self.setup_ui('./database_handler/screen.ui')
         self.link_components()
     
-    def setup_ui(self, ui_file_name):
+    @staticmethod
+    def setup_ui(ui_file_name):
         """
         Inicializar interface
         """
@@ -23,7 +25,7 @@ class Main(QMainWindow):
 
     def link_components(self):
         """
-        Vincular componentes da interface
+        V/incular componentes da interface
         """
         self.__main_tab = self.__window.main_tab
 
@@ -39,7 +41,7 @@ class Main(QMainWindow):
         self.__button_remove = self.__window.button__remove
 
         self.__update_github = self.__window.button__update_github
-        self.__update_medium= self.__window.button__update_medium
+        self.__update_medium = self.__window.button__update_medium
 
         self.__button_add.clicked.connect(self.add_line)
         self.__button_remove.clicked.connect(self.remove_line)
@@ -63,14 +65,16 @@ class Main(QMainWindow):
             controller = Controller()
             options = controller.get_data(self.get_number_tab(tab))
 
-            if not options: continue
+            if not options:
+                continue
+
             for line in options:
                 number_rows = tab.rowCount()
                 tab.insertRow(number_rows)
 
                 number_column = 0
                 for _ in range(len(line)):
-                    tab.setItem(number_rows , number_column, QTableWidgetItem(line[number_column]))
+                    tab.setItem(number_rows, number_column, QTableWidgetItem(line[number_column]))
                     number_column += 1
 
     def add_line(self):
@@ -78,7 +82,7 @@ class Main(QMainWindow):
         Adicionar linha na lista atual
         """
         tab = self.get_instance_tab(self.get_current_tab())
-        number_rows =  tab.rowCount()
+        number_rows = tab.rowCount()
         tab.insertRow(number_rows)
 
     def remove_line(self):

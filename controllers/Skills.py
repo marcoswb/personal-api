@@ -5,8 +5,10 @@ from os import getenv
 
 from models.Skills import Skills as ModelSkills
 
+
 class Skills(Resource):
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -14,17 +16,16 @@ class Skills(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = ModelSkills()
-            database_drop.drop_table()
+            skills_db = ModelSkills()
+            skills_db.connect()
+            skills_db.clear_table()
 
             for item in args:
-
-                database = ModelSkills()
-                database.connect()
-
-                database.name = item['name']
-                database.link_icon = item['link_icon']
-                
-                database.save()
+                data = {
+                    'name': item['name'],
+                    'link_icon': item['link_icon'],
+                }
+                skills_db.insert_line(data)
+            skills_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

@@ -1,36 +1,39 @@
-import peewee
-from dotenv import load_dotenv
-from os import getenv
-
-load_dotenv()
-db = peewee.PostgresqlDatabase(
-    getenv('DB_DATABASE'),
-    user=getenv('DB_USER'),
-    password=getenv('DB_PASSWORD'),
-    host=getenv('DB_HOST')
-)
+from classes.Postgres import Postgres
 
 
-class General(peewee.Model):
-    name = peewee.CharField()
-    full_name = peewee.CharField()
-    short_description = peewee.CharField()
-    about = peewee.TextField()
-    email = peewee.CharField()
-    number_phone = peewee.CharField()
-    github_link = peewee.CharField()
-    linkedin_link = peewee.CharField()
+class General(Postgres):
+    def __init__(self):
+        super().__init__('general')
 
-    class Meta:
-        database = db 
+    def insert_line(self, data: dict):
+        cursor = self.__connection.cursor()
 
-    @staticmethod
-    def connect():
-        try:
-            General.create_table()
-        except peewee.OperationalError:
-            pass
+        base_sql = f"""INSERT INTO {self.__table_name}(name,
+                                                       full_name,
+                                                       short_description,
+                                                       about,
+                                                       email,
+                                                       number_phone,
+                                                       github_link,
+                                                       linkedin_link)
+                            VALUES (%s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s)
+        """
+        cursor.execute(base_sql, (
+            data.get('name'),
+            data.get('full_name'),
+            data.get('about'),
+            data.get('email'),
+            data.get('number_phone'),
+            data.get('number_phone'),
+            data.get('linkedin_link'))
+        )
 
-    @staticmethod
-    def close_connection():
-        db.close()
+        cursor.close()
+        self.__connection.commit()

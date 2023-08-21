@@ -5,26 +5,24 @@ from os import getenv
 
 from models.Experience import Experience as ModelExperience
 
-class Experience(Resource):
-    def get(self):
-        database = ModelExperience()
-        database.connect()
-        result = database.select(
-            ModelExperience.company,
-            ModelExperience.ocuppation,
-            ModelExperience.period
-        ).dicts()
 
+class Experience(Resource):
+    @staticmethod
+    def get():
+        experience_db = ModelExperience()
+        experience_db.connect()
+        result = experience_db.select()
+        experience_db.close_connection()
+
+        experiences = []
         if result:
-            experiences = []
             for experience in result:
                 experiences.append(experience)
                 
-            return jsonify(experiences)
-        else:
-            return jsonify([])
+        return jsonify(experiences)
 
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -32,18 +30,17 @@ class Experience(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = ModelExperience()
-            database_drop.drop_table()
+            experience_db = ModelExperience()
+            experience_db.connect()
+            experience_db.clear_table()
 
             for item in args:
-
-                database = ModelExperience()
-                database.connect()
-
-                database.company = item['company']
-                database.ocuppation = item['ocuppation']
-                database.period = item['period']
-                
-                database.save()
+                data = {
+                    'company': item['company'],
+                    'occupation': item['occupation'],
+                    'period': item['period']
+                }
+                experience_db.insert_line(data)
+            experience_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

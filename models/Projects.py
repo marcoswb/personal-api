@@ -1,32 +1,15 @@
-import peewee
-from dotenv import load_dotenv
-from os import getenv
-
-load_dotenv()
-db = peewee.PostgresqlDatabase(
-    getenv('DB_DATABASE'),
-    user=getenv('DB_USER'),
-    password=getenv('DB_PASSWORD'),
-    host=getenv('DB_HOST')
-)
+from classes.Postgres import Postgres
 
 
-class Project(peewee.Model):
-    name = peewee.CharField()
-    description = peewee.CharField()
-    link = peewee.CharField()
-    languages = peewee.CharField()
+class Project(Postgres):
+    def __init__(self):
+        super().__init__('project')
 
-    class Meta:
-        database = db 
+    def insert_line(self, data: dict):
+        cursor = self.__connection.cursor()
 
-    @staticmethod
-    def connect():
-        try:
-            Project.create_table()
-        except peewee.OperationalError:
-            pass
+        base_sql = f'INSERT INTO {self.__table_name}(name, description, link, languages) VALUES (%s, %s, %s, %s)'
+        cursor.execute(base_sql, (data.get('name'), data.get('description'), data.get('link'), data.get('languages')))
 
-    @staticmethod
-    def close_connection():
-        db.close()
+        cursor.close()
+        self.__connection.commit()

@@ -3,29 +3,34 @@ from flask_restful import Resource
 from dotenv import load_dotenv
 from os import getenv
 
-from models.Blog import Blog as BlogSQLite
+from models.Blog import Blog as ModelBlog
+
 
 class Blog(Resource):
 
-    def get(self):
-        sqlite = BlogSQLite()
-        sqlite.connect()
-        data = sqlite.select().dicts()
+    @staticmethod
+    def get():
+        blog_db = ModelBlog()
+        blog_db.connect()
+        result = blog_db.select()
+        blog_db.close_connection()
 
         blog_posts = []
-        for post in data:
-            categories = post['categories'].split(',')
+        if result:
+            for post in result:
+                categories = post['categories'].split(',')
 
-            blog_posts.append({
-                'name': post['name'],
-                'description': post['description'],
-                'link': post['link'],
-                'categories': categories
-            })
+                blog_posts.append({
+                    'name': post['name'],
+                    'description': post['description'],
+                    'link': post['link'],
+                    'categories': categories
+                })
         
         return jsonify(blog_posts)
 
-    def post(self):
+    @staticmethod
+    def post():
         load_dotenv()
 
         token = request.headers['Authorization']
@@ -33,19 +38,19 @@ class Blog(Resource):
         if token == expected_token:
             args = request.json
             
-            database_drop = BlogSQLite()
-            database_drop.drop_table()
+            blog_db = ModelBlog()
+            blog_db.connect()
+            blog_db.clear_table()
 
             for item in args:
-
-                database = BlogSQLite()
-                database.connect()
-
-                database.name = item['name']
-                database.description = item['description']
-                database.link = item['link']
-                database.categories = item['categories']
+                data = {
+                    'name': item['name'],
+                    'description': item['description'],
+                    'link': item['link'],
+                    'categories': item['categories'],
+                }
                 
-                database.save()
+                blog_db.insert_line(data)
+            blog_db.close_connection()
         else:
             return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

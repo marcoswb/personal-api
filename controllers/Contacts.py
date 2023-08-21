@@ -3,15 +3,13 @@ from flask_restful import Resource
 
 from models.General import General
 
+
 class Contacts(Resource):
-    def get(self):
-        database = General()
-        database.connect()
-        result = database.select(
-            General.linkedin_link,
-            General.github_link,
-            General.email,
-            General.number_phone
-        ).dicts()
+    @staticmethod
+    def get():
+        general_db = General()
+        general_db.connect()
+        result = general_db.select()
+        general_db.close_connection()
 
         return jsonify(result[0])
