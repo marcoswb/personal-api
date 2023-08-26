@@ -11,7 +11,7 @@ class UpdateProjects:
         response = requests.get(f'https://api.github.com/users/{self.github_user}/repos')
         postgres_db = Postgres()
         postgres_db.connect()
-        postgres_db.clear_table()
+        postgres_db.clear_table('project')
 
         for project in response.json():
             languages_response = requests.get(f"https://api.github.com/repos/{self.github_user}/{project['name']}/languages")

@@ -1,9 +1,10 @@
 import requests
 import os
 
-from models.Blog import Blog
+from aws_lambda_update.classes.Postgres import Postgres
 
-class UpdateBlog():
+
+class UpdateBlog:
     medium_user = os.environ['MEDIUM_USER']
     api_key = os.environ['API_KEY']
     api_host = os.environ['API_HOST']
@@ -15,9 +16,9 @@ class UpdateBlog():
     }
 
     def update(self):
-        sqlite = Blog()
-        sqlite.drop_table()
-        sqlite.connect()
+        postgres_db = Postgres()
+        postgres_db.connect()
+        postgres_db.clear_table('blog')
 
         data = self.get_resp(f'/user/id_for/{self.medium_user}')
         user_id = data.get('id')
@@ -28,20 +29,12 @@ class UpdateBlog():
         for article_id in article_ids:
             article = self.get_resp(f'/article/{article_id}')
 
-            categories_string = ''
-            for category in article.get('tags'):
-                categories_string += f'{category},'
-            
-            description = ''
-            description = article.get('subtitle')[22:102]
-        
-            sqlite_blog = Blog()
-            sqlite_blog.connect()
-            sqlite_blog.name = article.get('title')
-            sqlite_blog.description = f'{description.capitalize()}...'
-            sqlite_blog.link = article.get('url')
-            sqlite_blog.categories = categories_string[:-1]
-            sqlite_blog.save()
+            categories_string = ', '.join(article.get('tags'))
+            description = f"{article.get('subtitle')[22:102]}..."
+
+            postgres_db.insert_blog_post(article.get('title'), description.capitalize(), article.get('url'), categories_string)
+
+        postgres_db.close_connection()
 
     def get_resp(self, endpoint):
         return requests.get(f'{self.base_url}{endpoint}', headers=self.headers).json()

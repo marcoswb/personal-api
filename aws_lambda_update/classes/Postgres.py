@@ -8,7 +8,6 @@ load_dotenv()
 class Postgres:
     def __init__(self):
         self.__connection = None
-        self.__table_name = 'project'
 
     def connect(self):
         self.__connection = psycopg2.connect(
@@ -22,16 +21,25 @@ class Postgres:
     def insert_project(self, name, description, link, languages):
         cursor = self.__connection.cursor()
 
-        base_sql = f'INSERT INTO {self.__table_name} (name, description, link, languages) VALUES (%s, %s, %s, %s)'
+        base_sql = f'INSERT INTO project (name, description, link, languages) VALUES (%s, %s, %s, %s)'
         cursor.execute(base_sql, (name, description, link, languages))
 
         cursor.close()
         self.__connection.commit()
 
-    def clear_table(self):
+    def insert_blog_post(self, name, description, link, categories):
         cursor = self.__connection.cursor()
 
-        sql_script = f'DELETE FROM {self.__table_name}'
+        base_sql = f'INSERT INTO blog (name, description, link, categories) VALUES (%s, %s, %s, %s)'
+        cursor.execute(base_sql, (name, description, link, categories))
+
+        cursor.close()
+        self.__connection.commit()
+
+    def clear_table(self, table):
+        cursor = self.__connection.cursor()
+
+        sql_script = f'DELETE FROM {table}'
         cursor.execute(sql_script)
 
         cursor.close()

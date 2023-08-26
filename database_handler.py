@@ -5,6 +5,7 @@ from PySide6.QtCore import QFile
 
 from database_handler.database_handler_controller import Controller
 from aws_lambda_update.controllers.update_projects import UpdateProjects
+from aws_lambda_update.controllers.update_blog import UpdateBlog
 
 
 class Main(QMainWindow):
@@ -128,7 +129,9 @@ class Main(QMainWindow):
         """
         Atualizar posts com o Medium
         """
-        show_message(self, 'Erro', 'Processo ainda não implementado.')
+        UpdateBlog().update()
+        self.load_tabs()
+        show_message(self, 'Processo finalizado', 'Dados atualizados com sucesso!')
 
     def get_current_tab(self):
         """
