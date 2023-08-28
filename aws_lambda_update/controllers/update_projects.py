@@ -16,6 +16,9 @@ class UpdateProjects:
         for project in response.json():
             languages_response = requests.get(f"https://api.github.com/repos/{self.github_user}/{project['name']}/languages")
 
+            if self.github_user == project['name']:
+                continue
+                
             languages_string = ''
             for language in languages_response.json():
                 languages_string += f'{language},'
