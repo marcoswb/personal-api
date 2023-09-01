@@ -18,7 +18,7 @@ class UpdateProjects:
 
             if self.github_user == project['name']:
                 continue
-                
+
             languages_string = ''
             for language in languages_response.json():
                 languages_string += f'{language},'
