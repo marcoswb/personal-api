@@ -7,11 +7,11 @@ load_dotenv()
 
 class Postgres:
     def __init__(self, table_name):
-        self.__connection = None
+        self.connection = None
         self.__table_name = str(table_name)
 
     def connect(self):
-        self.__connection = psycopg2.connect(
+        self.connection = psycopg2.connect(
                                 dbname=getenv('DB_DATABASE'),
                                 user=getenv('DB_USER'),
                                 password=getenv('DB_PASSWORD'),
@@ -22,8 +22,11 @@ class Postgres:
     def insert_line(self, data: dict):
         pass
 
+    def select_by_language(self):
+        pass
+
     def select(self):
-        cursor = self.__connection.cursor()
+        cursor = self.connection.cursor()
 
         cursor.execute(f'SELECT * FROM {self.__table_name}')
         result_db = cursor.fetchall()
@@ -37,13 +40,13 @@ class Postgres:
         return list_result
 
     def clear_table(self):
-        cursor = self.__connection.cursor()
+        cursor = self.connection.cursor()
 
         sql_script = f'DELETE FROM {self.__table_name}'
         cursor.execute(sql_script)
 
         cursor.close()
-        self.__connection.commit()
+        self.connection.commit()
 
     def close_connection(self):
-        self.__connection.close()
+        self.connection.close()

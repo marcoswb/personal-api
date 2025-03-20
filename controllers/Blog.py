@@ -12,21 +12,22 @@ class Blog(Resource):
     def get():
         blog_db = ModelBlog()
         blog_db.connect()
-        result = blog_db.select()
+        result = blog_db.select_by_language()
         blog_db.close_connection()
 
-        blog_posts = []
+        blog_posts = {}
         if result:
             for post in result:
-                categories = post['categories'].split(',')
+                blog_posts.setdefault(post.get('language'), [])
 
-                blog_posts.append({
-                    'name': post['name'],
-                    'description': post['description'],
-                    'link': post['link'],
-                    'categories': categories
+                blog_posts[post.get('language')].append({
+                    'id': post.get('id'),
+                    'name': post.get('name'),
+                    'description': post.get('description'),
+                    'link': post.get('link'),
+                    'categories': post.get('categories').split(',')
                 })
-        
+
         return jsonify(blog_posts)
 
     @staticmethod
