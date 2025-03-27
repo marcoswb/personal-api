@@ -11,13 +11,14 @@ class Experience(Resource):
     def get():
         experience_db = ModelExperience()
         experience_db.connect()
-        result = experience_db.select()
+        result = experience_db.select_by_language()
         experience_db.close_connection()
 
-        experiences = []
+        experiences = {}
         if result:
             for experience in result:
-                experiences.append(experience)
+                experiences.setdefault(experience.get('language'), [])
+                experiences[experience.get('language')].append(experience)
                 
         return jsonify(experiences)
 
