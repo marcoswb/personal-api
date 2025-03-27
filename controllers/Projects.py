@@ -12,18 +12,20 @@ class Projects(Resource):
     def get():
         project_db = ModelProject()
         project_db.connect()
-        result = project_db.select()
+        result = project_db.select_by_language()
         project_db.close_connection()
 
-        projects = []
+        projects = {}
         if result:
             for project in result:
-                languages = project['languages'].split(',')
-                projects.append({
+                projects.setdefault(project.get('language'), [])
+
+                projects[project.get('language')].append({
+                    'id': project.get('id'),
                     'name': project['name'],
                     'description': project['description'],
                     'link': project['link'],
-                    'languages': languages
+                    'languages': project['languages'].split(',')
                 })
 
         return jsonify(projects)
