@@ -12,19 +12,24 @@ class Root(Resource):
     def get():
         general_db = General()
         general_db.connect()
-        result = general_db.select()
+        result = general_db.select_by_language()
         general_db.close_connection()
         
         skills_db = Skills()
         skills_db.connect()
         result_skills = skills_db.select()
         skills_db.close_connection()
-        
-        result[0]['skills'] = []
-        for skill in result_skills:
-            result[0]['skills'].append(skill)
 
-        return jsonify(result[0])
+        result_dict = {}
+        if result:
+            for line in result:
+                line.setdefault('skills', [])
+                for skill in result_skills:
+                    line['skills'].append(skill)
+
+                result_dict[line.get('language')] = line
+
+        return jsonify(result_dict)
 
     @staticmethod
     def post():

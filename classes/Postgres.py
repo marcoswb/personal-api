@@ -28,7 +28,7 @@ class Postgres:
     def select(self):
         cursor = self.connection.cursor()
 
-        cursor.execute(f'SELECT * FROM {self.__table_name}')
+        cursor.execute(f'SELECT * FROM teste.{self.__table_name}')
         result_db = cursor.fetchall()
         header = [desc[0] for desc in cursor.description]
 
