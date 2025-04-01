@@ -22,8 +22,8 @@ class Formation(Postgres):
                                   formation_translate.institution,
                                   formation_translate.formation,
                                   formation_translate.period
-                            FROM teste.formation
-                            INNER JOIN teste.formation_translate
+                            FROM {self.schema}.formation
+                            INNER JOIN {self.schema}.formation_translate
                             ON formation_translate.fk_formation = formation.id
                             ORDER BY formation.id
         """)

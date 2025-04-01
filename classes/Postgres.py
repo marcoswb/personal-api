@@ -8,6 +8,7 @@ load_dotenv()
 class Postgres:
     def __init__(self, table_name):
         self.connection = None
+        self.schema = 'public'
         self.__table_name = str(table_name)
 
     def connect(self):
@@ -28,7 +29,7 @@ class Postgres:
     def select(self):
         cursor = self.connection.cursor()
 
-        cursor.execute(f'SELECT * FROM teste.{self.__table_name}')
+        cursor.execute(f'SELECT * FROM {self.schema}.{self.__table_name}')
         result_db = cursor.fetchall()
         header = [desc[0] for desc in cursor.description]
 

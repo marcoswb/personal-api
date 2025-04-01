@@ -51,8 +51,8 @@ class General(Postgres):
                                   general.number_phone,
                                   general.github_link,
                                   general.linkedin_link
-                           FROM teste.general
-                           INNER JOIN teste.general_translate
+                           FROM {self.schema}.general
+                           INNER JOIN {self.schema}.general_translate
                            ON general_translate.fk_general = general.id
                            ORDER BY general.id
         """)

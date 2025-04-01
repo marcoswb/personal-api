@@ -23,8 +23,8 @@ class Blog(Postgres):
                                   blog_translate.description,
                                   blog_translate.categories,
                                   blog.link
-                           FROM teste.blog
-                           INNER JOIN teste.blog_translate
+                           FROM {self.schema}.blog
+                           INNER JOIN {self.schema}.blog_translate
                            ON blog_translate.fk_blog = blog.id
                            ORDER BY blog.id
         """)

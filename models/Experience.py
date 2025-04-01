@@ -22,8 +22,8 @@ class Experience(Postgres):
                                   experience_translate.company,
                                   experience_translate.ocuppation,
                                   experience_translate.period
-                            FROM teste.experience
-                            INNER JOIN teste.experience_translate
+                            FROM {self.schema}.experience
+                            INNER JOIN {self.schema}.experience_translate
                             ON experience_translate.fk_experience = experience.id
                             ORDER BY experience.id
         """)

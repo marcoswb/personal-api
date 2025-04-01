@@ -23,8 +23,8 @@ class Project(Postgres):
                                   project_translate.description,
                                   project_translate.languages,
                                   project.link
-                            FROM teste.project
-                            INNER JOIN teste.project_translate
+                            FROM {self.schema}.project
+                            INNER JOIN {self.schema}.project_translate
                             ON project_translate.fk_project = project.id
                             ORDER BY project.id
         """)
