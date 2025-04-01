@@ -6,7 +6,7 @@ class General(Postgres):
         super().__init__('general')
 
     def insert_line(self, data: dict):
-        cursor = self.__connection.cursor()
+        cursor = self.connection.cursor()
 
         base_sql = f"""INSERT INTO {self.__table_name}(name,
                                                        full_name,
@@ -36,4 +36,32 @@ class General(Postgres):
         )
 
         cursor.close()
-        self.__connection.commit()
+        self.connection.commit()
+
+    def select_by_language(self):
+        cursor = self.connection.cursor()
+
+        cursor.execute(f"""SELECT general.id,
+                                  general_translate.language,
+                                  general.name,
+                                  general.full_name,
+                                  general_translate.short_description,
+                                  general_translate.about,
+                                  general.email,
+                                  general.number_phone,
+                                  general.github_link,
+                                  general.linkedin_link
+                           FROM {self.schema}.general
+                           INNER JOIN {self.schema}.general_translate
+                           ON general_translate.fk_general = general.id
+                           ORDER BY general.id
+        """)
+        result_db = cursor.fetchall()
+        header = [desc[0] for desc in cursor.description]
+
+        list_result = []
+        for line in result_db:
+            list_result.append(dict(zip(header, line)))
+
+        cursor.close()
+        return list_result
