@@ -1,7 +1,5 @@
 from flask_restful import Resource
-from flask import request, Response, jsonify
-from dotenv import load_dotenv
-from os import getenv
+from flask import jsonify
 
 from models.Formation import Formation as ModelFormation
 
@@ -21,27 +19,3 @@ class Formation(Resource):
                 formations[formation.get('language')].append(formation)
 
         return jsonify(formations)
-
-    @staticmethod
-    def post():
-        load_dotenv()
-
-        token = request.headers['Authorization']
-        expected_token = getenv('TOKEN')
-        if token == expected_token:
-            args = request.json
-            
-            formation_db = ModelFormation()
-            formation_db.clear_table()
-            formation_db.connect()
-
-            for item in args:
-                data = {
-                    'institution': item['institution'],
-                    'formation': item['formation'],
-                    'period': item['period']
-                }
-                formation_db.insert_line(data)
-            formation_db.close_connection()
-        else:
-            return Response("{'status': 'Unauthorized'}", status=401, mimetype='application/json')

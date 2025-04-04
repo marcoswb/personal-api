@@ -108,7 +108,7 @@ Nesta seção explicarei os diretórios e arquivos utilizados no projeto:
   - **psycopg2/** - Na aplicação eu utilizo banco de dados PostgreSQL para armazenar os dados, e na AWS ainda há uma incompatibilidade com a lib psycopg2(lib para conexão com banco PostgreSQL) do python, sendo necessário importar toda a lib para dentro da AWS para que funcione corretamente;
   - **main.py** - Arquivo principal, que faz a chamada para os métodos de atualização;
   
-- **controllers/** - Diretório que contém basicamente o código por trás de cada endpoint da API. Organizando os dados que serão retornados em uma chamada GET ou validando e gravando no banco de dados quando for feita uma requisição do tipo POST;
+- **controllers/** - Diretório que contém basicamente o código por trás de cada endpoint da API. Organizando os dados que serão retornados em uma chamada GET;
 
 - **models/** - Diretório que contém classes Python, que mapeiam tabelas do banco de dados para objetos Python;
   
