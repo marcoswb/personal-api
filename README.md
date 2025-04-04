@@ -146,8 +146,7 @@ Como servidor de banco de dados e plataforma de deploy utilizei o [Heroku](https
 
 1. Basta criar um novo projeto no Heroku, e vincular seu projeto do Github nele. Ao vincular o projeto do Github, toda vez que você fizer um commit na branch main, automaticamente será feito um novo deploy do app pelo Heroku;
 
-2. Depois de criado o projeto você pode ir até a aba "Resources" e adicionar o serviço **Heroku Postgres**, ao adicionar o serviço o Heroku irá fornecer as chaves de acesso ao banco de dados criado, e você pode preenche-las no arquivo .env explicado anteriormente.
-   3. Para iniciar o banco de dadas está disponível o script ``init_database.sql`` que irá criar toda a estrutura de banco de dados para o projeto.
+2. Depois de criado o projeto você pode ir até a aba "Resources" e adicionar o serviço **Heroku Postgres**, ao adicionar o serviço o Heroku irá fornecer as chaves de acesso ao banco de dados criado, e você pode preenche-las no arquivo .env explicado anteriormente. Para iniciar o banco de dadas está disponível o script ``init_database.sql`` que irá criar toda a estrutura de banco de dados para o projeto.
 
 3. Por ultimo é só adicionar as mesmas variáveis do arquivo .env nas variáveis de ambiente do projeto no Heroku.
 
