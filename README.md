@@ -21,8 +21,6 @@
 
 Este projeto visa a criação de uma REST API para servir dados pessoais, que irão ser consumidos posteriormente por um frontend [nesse projeto](https://github.com/marcoswb/personal-api-frontend). Os dados servidos serão basicamente algumas informações pessoais(resumo pessoal, skills, experiências profissionais, formações, contatos...), além de realizar uma integração com a API do github para listar os projetos desenvolvidos e também uma integração com a API do Medium, para listagem de posts que tenho na plataforma.
 
-Além da criação da API REST o projeto conta com um app desktop, desenvolvido com o intuito de facilitar o gerenciamento(inserção/exclusão/atualização) das informações que serão servidas pela API, e que estarão em um banco de dados;
-
 A motivação para o desenvolvimento desse projeto foi o aprendizado, e também para conseguir por em prática conhecimentos que antes só tinha na teoria.
 
 
@@ -31,8 +29,6 @@ A motivação para o desenvolvimento desse projeto foi o aprendizado, e também 
 
 - **Python** -> Linguagem base para a criação da API REST e do app desktop;
 - **Flask** -> Framework Python para a criação de APIs REST;
-- **PySide6** -> Wrapper Python para a biblioteca Qt, utilizado para a criação de apps desktop multiplataforma.
-- **Peewee** -> ORM destinado a criar e gerenciar tabelas de banco de dados relacionais através de objetos Python;
 - **PostgreSQL** -> Banco de dados relacional e open source;
 - **Heroku** -> Plataforma de nuvem como serviço. Utilizado no projeto para o deploy da API REST e também como servidor de banco de dados;
 - **AWS Lambda** -> Serviço de computação disponibilizado na plataforma AWS que executa código em resposta a eventos. Utilizado no projeto para executar constantemente uma rotina que mantém o banco de dados atualizado.
@@ -62,20 +58,11 @@ A estrutura de arquivos está da seguinte maneira:
 │   └── main.py
 |
 ├── controllers/
-|
-├── database_handler/
-│   ├── controllers/
-|   |
-│   ├── database_handler_controller.py
-|   |
-│   └── screen.ui
-|
 ├── models/
 |   
 ├── .env
 ├── .gitignore
 ├── app.py
-├── database_handler.py
 ├── LICENSE
 ├── Procfile
 ├── README.md
@@ -122,12 +109,7 @@ Nesta seção explicarei os diretórios e arquivos utilizados no projeto:
   - **main.py** - Arquivo principal, que faz a chamada para os métodos de atualização;
   
 - **controllers/** - Diretório que contém basicamente o código por trás de cada endpoint da API. Organizando os dados que serão retornados em uma chamada GET ou validando e gravando no banco de dados quando for feita uma requisição do tipo POST;
-  
-- **database_handler/** - Diretório que contém uma aplicação desktop simples feita com a lib PySide6 e que pode ser utilizada para inserir/apagar/atualizar os dados do banco de dados via uma interface gráfica;
-  - **controllers/** - Diretório que contém basicamente um arquivo para cada endpoint da API e que irá fazer a comunicação entre o desktop e a API, trazendo dados da API para o desktop e levando do desktop para a API;
-  - **database_handler_controller.py** - Arquivo que organiza a lógica de execução do app desktop, populando as informações onde elas devem aparecer e também coletando-as e passando para os controllers enviarem para a API;
-  - **screen.ui** - Arquivo em formato XML, que é utilizado pela lib PySide6 para renderizar os componentes em tela, é basicamente um espelho em formato de código do que irá ser renderizado na interface;
-  
+
 - **models/** - Diretório que contém classes Python, que mapeiam tabelas do banco de dados para objetos Python;
   
 - **.env** - Arquivo que armazena as variáveis de ambiente da aplicação`(você deve criar esse arquivo)`, dentre elas estão:
@@ -148,8 +130,6 @@ Nesta seção explicarei os diretórios e arquivos utilizados no projeto:
   
 - **app.py** - Arquivo principal que declara quais endpoints são aceitos pela API;
   
-- **database_handler.py** - Arquivo que vai iniciar o app desktop;
-  
 - **LICENSE** - Arquivo de licença de uso do projeto;
   
 - **Procfile** - Arquivo que vai ditar o comando necessário para fazer o deploy da API na plataforma do Heroku;
@@ -167,6 +147,7 @@ Como servidor de banco de dados e plataforma de deploy utilizei o [Heroku](https
 1. Basta criar um novo projeto no Heroku, e vincular seu projeto do Github nele. Ao vincular o projeto do Github, toda vez que você fizer um commit na branch main, automaticamente será feito um novo deploy do app pelo Heroku;
 
 2. Depois de criado o projeto você pode ir até a aba "Resources" e adicionar o serviço **Heroku Postgres**, ao adicionar o serviço o Heroku irá fornecer as chaves de acesso ao banco de dados criado, e você pode preenche-las no arquivo .env explicado anteriormente.
+   3. Para iniciar o banco de dadas está disponível o script ``init_database.sql`` que irá criar toda a estrutura de banco de dados para o projeto.
 
 3. Por ultimo é só adicionar as mesmas variáveis do arquivo .env nas variáveis de ambiente do projeto no Heroku.
 
