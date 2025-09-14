@@ -9,3 +9,4 @@ psycopg2
 python-dotenv
 PySide6
 requests
+rapidfuzz
