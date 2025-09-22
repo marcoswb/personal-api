@@ -8,8 +8,6 @@ from controllers.Formation import Formation
 from controllers.Projects import Projects
 from controllers.Blog import Blog
 from controllers.Contacts import Contacts
-from controllers.Mateus import Mateus
-
 
 app = Flask(__name__)
 CORS(app)
@@ -22,7 +20,6 @@ api.add_resource(Formation, '/formation')
 api.add_resource(Projects, '/projects')
 api.add_resource(Blog, '/blog')
 api.add_resource(Contacts, '/contacts')
-api.add_resource(Mateus, '/mateus')
 
 if __name__ == '__main__':
     app.run()
