@@ -26,7 +26,7 @@ class Project(Postgres):
                             FROM {self.schema}.project
                             INNER JOIN {self.schema}.project_translate
                             ON project_translate.fk_project = project.id
-                            ORDER BY project.id
+                            ORDER BY project.order
         """)
         result_db = cursor.fetchall()
         header = [desc[0] for desc in cursor.description]
