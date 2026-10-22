@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS public.experience_translate
     company character varying(100) COLLATE pg_catalog."default",
     ocuppation character varying(150) COLLATE pg_catalog."default",
     period character varying(50) COLLATE pg_catalog."default",
+    highlights text COLLATE pg_catalog."default",
     CONSTRAINT experience_translate_pkey PRIMARY KEY (id),
     CONSTRAINT fk_experience FOREIGN KEY (fk_experience)
         REFERENCES public.experience (id) MATCH SIMPLE
@@ -82,6 +83,7 @@ CREATE TABLE IF NOT EXISTS public.general_translate
     language character varying(5) COLLATE pg_catalog."default",
     short_description character varying(100) COLLATE pg_catalog."default",
     about character varying(1000) COLLATE pg_catalog."default",
+    role_title character varying(120) COLLATE pg_catalog."default",
     CONSTRAINT general_translate_pkey PRIMARY KEY (id),
     CONSTRAINT fk_general FOREIGN KEY (fk_general)
         REFERENCES public.general (id) MATCH SIMPLE
@@ -117,5 +119,6 @@ CREATE TABLE IF NOT EXISTS public.skills
     id integer NOT NULL DEFAULT nextval('skills_id_seq'::regclass),
     name character varying(50) COLLATE pg_catalog."default",
     link_icon character varying(200) COLLATE pg_catalog."default",
+    category character varying(30) COLLATE pg_catalog."default",
     CONSTRAINT skills_pkey PRIMARY KEY (id)
 );
