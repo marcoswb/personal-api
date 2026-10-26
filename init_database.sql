@@ -95,6 +95,9 @@ CREATE TABLE IF NOT EXISTS public.project
 (
     id integer NOT NULL DEFAULT nextval('project_id_seq'::regclass),
     link character varying(200) COLLATE pg_catalog."default",
+    "order" integer,
+    featured boolean NOT NULL DEFAULT false,
+    featured_order integer,
     CONSTRAINT project_pkey PRIMARY KEY (id)
 );
 
