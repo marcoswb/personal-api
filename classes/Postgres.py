@@ -12,10 +12,6 @@ class Postgres:
         self.__table_name = str(table_name)
 
     def connect(self):
-        print(getenv('DB_DATABASE'))
-        print(getenv('DB_USER'))
-        print(getenv('DB_PASSWORD'))
-        print(getenv('DB_HOST'))
         self.connection = psycopg2.connect(
                                 dbname=getenv('DB_DATABASE'),
                                 user=getenv('DB_USER'),
