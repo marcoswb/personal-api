@@ -22,11 +22,16 @@ class Project(Postgres):
                                   project_translate.name,
                                   project_translate.description,
                                   project_translate.languages,
-                                  project.link
+                                  project.link,
+                                  project.featured,
+                                  project.featured_order,
+                                  project."order"
                             FROM {self.schema}.project
                             INNER JOIN {self.schema}.project_translate
                             ON project_translate.fk_project = project.id
-                            ORDER BY project.order
+                            ORDER BY project.featured_order NULLS LAST,
+                                     project."order" NULLS LAST,
+                                     project.id
         """)
         result_db = cursor.fetchall()
         header = [desc[0] for desc in cursor.description]

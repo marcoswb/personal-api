@@ -16,6 +16,13 @@ class Experience(Resource):
         if result:
             for experience in result:
                 experiences.setdefault(experience.get('language'), [])
+                experience['highlights'] = _highlights(experience.get('highlights'))
                 experiences[experience.get('language')].append(experience)
-                
+
         return jsonify(experiences)
+
+
+def _highlights(value):
+    if not value:
+        return []
+    return [line.strip() for line in str(value).splitlines() if line.strip()]

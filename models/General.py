@@ -47,6 +47,7 @@ class General(Postgres):
                                   general.full_name,
                                   general_translate.short_description,
                                   general_translate.about,
+                                  general_translate.role_title,
                                   general.email,
                                   general.number_phone,
                                   general.github_link,

@@ -18,12 +18,15 @@ class Projects(Resource):
             for project in result:
                 projects.setdefault(project.get('language'), [])
 
+                languages = project.get('languages') or ''
                 projects[project.get('language')].append({
                     'id': project.get('id'),
                     'name': project['name'],
                     'description': project['description'],
                     'link': project['link'],
-                    'languages': project['languages'].split(',')
+                    'languages': [part.strip() for part in languages.split(',') if part.strip()],
+                    'featured': bool(project.get('featured')),
+                    'featured_order': project.get('featured_order'),
                 })
 
         return jsonify(projects)
